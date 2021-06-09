@@ -3,11 +3,18 @@ import { Link, graphql } from 'gatsby'
 import Masonry from 'react-masonry-component'
 import Img from 'gatsby-image'
 import Layout from "../components/layout"
+import Pintura from "./pintura"
+import { HorizontalLayout } from '../components/HorizontalLayout'
 
-const IndexPage = ({ data }) => (
-  <Layout>
-    <Masonry className="showcase">
-      {data.allDatoCmsWork.edges.map(({ node: work }) => (
+import '../components/test.scss'
+
+const IndexPage = ({ data }) => {
+  console.log('data', data)
+  //     <Pintura data={data} />
+  return <HorizontalLayout>
+    jose
+    {/* <Masonry className="showcase">
+      {data.allDatoCmsPintura.edges.map(({ node: work }) => (
         <div key={work.id} className="showcase__item">
           <figure className="card">
             <Link to={`/works/${work.slug}`} className="card__image">
@@ -17,22 +24,22 @@ const IndexPage = ({ data }) => (
               <h6 className="card__title">
                 <Link to={`/works/${work.slug}`}>{work.title}</Link>
               </h6>
-              <div className="card__description">
+              <div className="jose">
                 <p>{work.excerpt}</p>
               </div>
             </figcaption>
           </figure>
         </div>
-      ))}
+      ))} */}
     </Masonry>
-  </Layout>
-)
+  </HorizontalLayout>
+}
 
 export default IndexPage
 
 export const query = graphql`
   query IndexQuery {
-    allDatoCmsWork(sort: { fields: [position], order: ASC }) {
+    allDatoCmsPintura {
       edges {
         node {
           id
@@ -41,7 +48,7 @@ export const query = graphql`
           excerpt
           coverImage {
             fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-              ...GatsbyDatoCmsSizes
+            ...GatsbyDatoCmsSizes
             }
           }
         }
