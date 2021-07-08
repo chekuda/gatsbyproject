@@ -8,6 +8,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
+    '@chakra-ui/gatsby-plugin',
     {
       resolve: `gatsby-source-datocms`,
       options: {
