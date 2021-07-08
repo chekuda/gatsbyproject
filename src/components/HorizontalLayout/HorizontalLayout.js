@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Flex, Box, Link, Image } from "@chakra-ui/react"
 import { Link as GatsbyLink } from 'gatsby'
 import TopBanner from '../TopBanner'
@@ -18,7 +17,7 @@ const links = [
     url: '/esculturas'
   }]
 
-const HorizontalLayout = ({ children, location }) => {
+const HorizontalLayout = ({ children, location, ...rest }) => {
   return (
     <Box h='200%' bgColor='#131315'>
       <Box bg='black' bgImage={'/images/heroImage.jpeg'} backgroundPosition='bottom' backgroundSize='cover'>
@@ -39,7 +38,7 @@ const HorizontalLayout = ({ children, location }) => {
                   <Link
                     _hover={{ textDecoration: 'none', color: 'blue.400' }}
                     p='0 10px 5px 0'
-                    getProps
+                    to={url}
                     fontSize='1rem'
                     as={GatsbyLink}
                     key={name}
@@ -58,16 +57,6 @@ const HorizontalLayout = ({ children, location }) => {
       </Box>
     </Box>
   )
-}
-
-HorizontalLayout.propTypes = {
-    children: PropTypes.node.isRequired,
-    bodyClass: PropTypes.string,
-    isHome: PropTypes.bool,
-    data: PropTypes.shape({
-        file: PropTypes.object,
-        allGhostSettings: PropTypes.object.isRequired,
-    }).isRequired,
 }
 
 export default HorizontalLayout

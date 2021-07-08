@@ -1,6 +1,7 @@
 import React from 'react'
 import { ChakraProvider, extendTheme} from "@chakra-ui/react"
 import { createBreakpoints } from "@chakra-ui/theme-tools"
+import SimpleReactLightbox from 'simple-react-lightbox'
 
 import HorizontalLayout from './src/components/HorizontalLayout/HorizontalLayout'
 import "@fontsource/roboto/400.css"
@@ -12,8 +13,6 @@ const breakpoints = createBreakpoints({
   xl: "80em",
   "2xl": "96em",
 })
-
-console.log(breakpoints)
 
 const theme = extendTheme({
   fonts: {
@@ -28,12 +27,12 @@ const theme = extendTheme({
   breakpoints
 })
 
-console.log('theme', theme)
-
 export const wrapRootElement = ({ element }) => {
   return (
     <ChakraProvider theme={theme}>
-      {element}
+      <SimpleReactLightbox>
+        {element}
+      </SimpleReactLightbox>
     </ChakraProvider>
   )
 }

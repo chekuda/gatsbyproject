@@ -1,17 +1,28 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Flex } from "@chakra-ui/react"
+import { SRLWrapper } from "simple-react-lightbox"
 
 import { Card } from '../components/Card/Card'
 
 const Esculturas = ({ data }) => {
   const { allDatoCmsEscultura } = data || {}
-  return <Flex flexWrap="wrap" justifyContent='center'>
-    {console.log('allDatoCmsEscultura.edges', allDatoCmsEscultura.edges)}
-    {
-      allDatoCmsEscultura.edges.map(({ node }) => <Card key={node.id} title={node.title} id={node.id} image={node?.coverImage?.fluid?.src}/>)
-    }
-  </Flex>
+  return (
+    <SRLWrapper>
+      <Flex flexWrap="wrap" justifyContent='center'>
+          {
+            allDatoCmsEscultura.edges.map(({ node }) =>
+              <Card
+                cursorMode='zoom-in'
+                key={node.id}
+                title={node.title}
+                id={node.id}
+                image={node?.coverImage?.fluid?.src}
+              />)
+          }
+      </Flex>
+    </SRLWrapper>
+  )
 }
 
 export default Esculturas

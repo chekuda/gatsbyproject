@@ -18,7 +18,6 @@ const TopBanner = () => {
   }
 `)
  const { nodes } = data.allDatoCmsSocialProfile
- const uniqueNodes = nodes.filter(node => !!node.image.title)
   return (
     <Flex color='white' justifyContent='space-between' alignItems='center'>
       <Box>
@@ -26,10 +25,10 @@ const TopBanner = () => {
       </Box>
       <Flex>
         {
-          uniqueNodes.map(node => (
-          <Box p='0 5px' key={node.id}>
-            <Image h='20px' src={node.image.url} />
-          </Box>
+          nodes.map(node => (
+            <Box p='0 5px' key={node.id}>
+              <Image h='20px' src={node?.image?.url} />
+            </Box>
         ))
         }
       </Flex>
