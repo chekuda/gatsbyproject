@@ -3,7 +3,7 @@ import { ChakraProvider, extendTheme} from "@chakra-ui/react"
 import { createBreakpoints } from "@chakra-ui/theme-tools"
 import SimpleReactLightbox from 'simple-react-lightbox'
 
-import HorizontalLayout from './src/components/HorizontalLayout/HorizontalLayout'
+import { HorizontalLayout } from './src/layout/HorizontalLayout'
 import "@fontsource/roboto/400.css"
 
 const breakpoints = createBreakpoints({

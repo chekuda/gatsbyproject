@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Link, Image } from "@chakra-ui/react"
 import { Link as GatsbyLink } from 'gatsby'
-import TopBanner from '../TopBanner'
+import { TopBanner } from '../../components/TopBanner'
 
 const links = [
   {
@@ -17,7 +17,7 @@ const links = [
     url: '/esculturas'
   }]
 
-const HorizontalLayout = ({ children, location, ...rest }) => {
+export const HorizontalLayout = ({ children, uri }) => {
   return (
     <Box h='200%' bgColor='#131315'>
       <Box bg='black' bgImage={'/images/heroImage.jpeg'} backgroundPosition='bottom' backgroundSize='cover'>
@@ -37,13 +37,15 @@ const HorizontalLayout = ({ children, location, ...rest }) => {
                 links.map(({ name, url }) =>
                   <Link
                     _hover={{ textDecoration: 'none', color: 'blue.400' }}
-                    p='0 10px 5px 0'
+                    _focus={{ outline: 'none' }}
+                    m='0 5px'
                     to={url}
                     fontSize='1rem'
                     as={GatsbyLink}
+                    borderBottom={url === uri ? 'solid' : 'none'}
                     key={name}
                     href={url}
-                    activeStyle={{ color: 'red' }}
+                    activeStyle={{ borderBottom: 'solid' }}
                   >
                     {name}
                   </Link>)
@@ -58,5 +60,3 @@ const HorizontalLayout = ({ children, location, ...rest }) => {
     </Box>
   )
 }
-
-export default HorizontalLayout

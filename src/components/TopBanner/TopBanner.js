@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Text, Image } from "@chakra-ui/react"
 import { graphql, useStaticQuery } from 'gatsby'
 
-const TopBanner = () => {
+export const TopBanner = () => {
   const data = useStaticQuery(graphql`
   query SocialQuery {
     allDatoCmsSocialProfile {
@@ -35,5 +35,3 @@ const TopBanner = () => {
     </Flex>
   )
 }
-
-export default TopBanner

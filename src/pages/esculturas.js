@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { Flex } from "@chakra-ui/react"
 import { SRLWrapper } from "simple-react-lightbox"
 
-import { Card } from '../components/Card/Card'
+import { Card } from '../components/Card'
 
 const Esculturas = ({ data }) => {
   const { allDatoCmsEscultura } = data || {}
