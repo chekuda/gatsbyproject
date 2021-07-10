@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Flex, useBreakpointValue } from "@chakra-ui/react"
-import { SRLWrapper } from "simple-react-lightbox"
+import { Flex, useBreakpointValue } from '@chakra-ui/react'
+import { SRLWrapper } from 'simple-react-lightbox'
 
 import { Card } from '../components/Card'
 
@@ -10,19 +10,18 @@ const Esculturas = ({ data }) => {
   const { allDatoCmsEscultura } = data || {}
   return (
     <SRLWrapper>
-      <Flex flexWrap="wrap" justifyContent='center'>
-          {
-            allDatoCmsEscultura.edges.map(({ node }) =>
-              <Card
-                cursorMode='zoom-in'
-                key={node.id}
-                title={node.title}
-                id={node.id}
-                image={node?.coverImage?.fluid?.src}
-                width={cardWidth}
-                height='16rem'
-              />)
-          }
+      <Flex flexWrap="wrap" justifyContent="center">
+        {allDatoCmsEscultura.edges.map(({ node }) => (
+          <Card
+            cursorMode="zoom-in"
+            key={node.id}
+            title={node.title}
+            id={node.id}
+            image={node?.coverImage?.fluid?.src}
+            width={cardWidth}
+            height="16rem"
+          />
+        ))}
       </Flex>
     </SRLWrapper>
   )
@@ -41,7 +40,7 @@ export const query = graphql`
           excerpt
           coverImage {
             fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-            ...GatsbyDatoCmsSizes
+              ...GatsbyDatoCmsSizes
             }
           }
         }

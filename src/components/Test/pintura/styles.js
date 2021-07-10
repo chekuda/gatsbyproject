@@ -16,18 +16,18 @@ export default theme => {
       },
       [theme.breakpoints.up('md')]: {
         width: 'calc( ( 100% - 120px ) / 6)',
-      }
+      },
     },
     gridItem: {
       cursor: 'pointer',
-      width: '100%'
+      width: '100%',
     },
     cardCaption: {
       backgroundColor: 'white',
-      padding: '20px'
+      padding: '20px',
     },
     cardTitle: {
-      marginBottom: '10px'
-    }
+      marginBottom: '10px',
+    },
   }
 }

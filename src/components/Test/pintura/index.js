@@ -4,7 +4,7 @@ import React from 'react'
 
 const Pintura = () => {
   return (
-    <div className=''>
+    <div className="">
       {
         // data.allDatoCmsWork.edges.map(data =>
         //   <Paper key={data.title} className={classes.paper}>
