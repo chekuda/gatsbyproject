@@ -37,9 +37,15 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\""
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
     "prettier": "^1.17.0"
   }
 }

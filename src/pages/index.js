@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 
-const IndexPage = ({ data }) => {
+const IndexPage = () => {
   return <p>papi picture</p>
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 // import styles from './styles'
 
-const Pintura = ({ data }) => {
+const Pintura = () => {
   return (
     <div className=''>
       {
