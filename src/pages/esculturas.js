@@ -1,11 +1,12 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Flex } from "@chakra-ui/react"
+import { Flex, useBreakpointValue } from "@chakra-ui/react"
 import { SRLWrapper } from "simple-react-lightbox"
 
 import { Card } from '../components/Card'
 
 const Esculturas = ({ data }) => {
+  const cardWidth = useBreakpointValue({ base: '14em', md: '12em', xl: '14em' })
   const { allDatoCmsEscultura } = data || {}
   return (
     <SRLWrapper>
@@ -18,6 +19,8 @@ const Esculturas = ({ data }) => {
                 title={node.title}
                 id={node.id}
                 image={node?.coverImage?.fluid?.src}
+                width={cardWidth}
+                height='16rem'
               />)
           }
       </Flex>

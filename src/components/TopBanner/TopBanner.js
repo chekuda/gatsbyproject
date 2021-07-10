@@ -9,9 +9,9 @@ export const TopBanner = () => {
       nodes {
         id
         url
+        profileType
         image {
           url
-          title
         }
       }
     }
@@ -27,7 +27,7 @@ export const TopBanner = () => {
         {
           nodes.map(node => (
             <Box p='0 5px' key={node.id}>
-              <Image h='20px' src={node?.image?.url} />
+              <Image h='20px' alt={node.profileType} src={node?.image?.url} />
             </Box>
         ))
         }
