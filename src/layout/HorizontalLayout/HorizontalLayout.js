@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React from 'react'
 import { Flex, Box, Link, Image } from '@chakra-ui/react'
 import { Link as GatsbyLink } from 'gatsby'
 
@@ -18,7 +18,6 @@ const links = [
 ]
 
 export const HorizontalLayout = ({ children, uri }) => {
-  const isHome = useMemo(() => uri === '/', [uri])
   return (
     <Box>
       <Box bg="black">
