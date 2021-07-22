@@ -35,14 +35,7 @@ const Test = ({ item, list }) => {
         </Box>
         <motion.div variants={item}>
           <Box justifyContent="center">
-            <Image
-              width="300px"
-              objectFit="cover"
-              src={
-                'https://3.bp.blogspot.com/-F9lAwA-wRcE/T8PBmDvxeVI/AAAAAAAAqXs/YwoU5_yF9XI/s1600/482px-Jos%25C3%25A9_Luis_Checa.jpg'
-              }
-              alt="Alomejor logo"
-            />
+            <Image width="300px" objectFit="cover" src="/images/daddy_no_bg.png" alt="Alomejor logo" />
           </Box>
         </motion.div>
       </Flex>
