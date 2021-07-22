@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useMemo, useRef } from 'react'
 import { Flex, Box, Link, Image } from '@chakra-ui/react'
 import { Link as GatsbyLink } from 'gatsby'
-import { TopBanner } from '../../components/TopBanner'
 
 const links = [
   {
@@ -19,15 +18,17 @@ const links = [
 ]
 
 export const HorizontalLayout = ({ children, uri }) => {
+  const isHome = useMemo(() => uri === '/', [uri])
   return (
-    <Box h="200%" bgColor="#131315">
-      <Box bg="black" bgImage={'/images/heroImage.jpeg'} backgroundPosition="bottom" backgroundSize="cover">
+    <Box>
+      <Box bg="black">
         <Box w="80%" maxW={1024} m="0 auto">
-          <TopBanner />
-          <Box display="flex" justifyContent="center">
-            <Image width="400px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
-          </Box>
-          <Flex color="white">
+          <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
+            <Box display="flex" justifyContent="center">
+              <Link to={'/'} href={'/'} as={GatsbyLink} _focus={{ outline: 'none' }}>
+                <Image width="150px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
+              </Link>
+            </Box>
             <Box p="20px 0" as="nav" decoration="none">
               {links.map(({ name, url }) => (
                 <Link
@@ -49,9 +50,9 @@ export const HorizontalLayout = ({ children, uri }) => {
           </Flex>
         </Box>
       </Box>
-      <Box w="80%" maxW={1024} m="0 auto" p="20px 0" bgColor="#131315">
+      <Flex w="80%" maxW={1024} m="0 auto" p="20px 0" overflowY="auto">
         {children}
-      </Box>
+      </Flex>
     </Box>
   )
 }
