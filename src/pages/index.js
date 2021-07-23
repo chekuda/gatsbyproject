@@ -1,11 +1,29 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Flex, Box, Image, Heading, Text } from '@chakra-ui/react'
+import { Flex, Box, Image, Heading, Text, useBreakpointValue, useBreakpoint } from '@chakra-ui/react'
 
-const Test = ({ item, list }) => {
+const Section = ({ item, list }) => {
+  const breakPoints = useBreakpointValue({
+    base: {
+      height: 'auto',
+      direction: 'column',
+    },
+    md: {
+      height: 'calc(100vh - 115px)',
+      direction: 'row',
+    },
+  })
+
   return (
     <motion.div variants={list} initial="hidden" animate="visible">
-      <Flex p="50px 0" alignItems="center" w="100%" h="calc(100vh - 115px)">
+      <Flex
+        as="section"
+        p="50px 0"
+        alignItems="center"
+        w="100%"
+        h={breakPoints?.height}
+        flexDirection={breakPoints?.direction}
+      >
         <Box flex="1" justifyContent="center">
           <motion.div variants={item}>
             <Heading as="h1" size="4xl" paddingBottom="20px">
@@ -62,7 +80,7 @@ const IndexPage = () => {
   return (
     <Box w="100%">
       {[1, 2].map(ele => (
-        <Test key={ele} item={item} list={list} />
+        <Section key={ele} item={item} list={list} />
       ))}
     </Box>
   )
