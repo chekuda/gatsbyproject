@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Image, useTheme } from '@chakra-ui/react'
 
 export const Card = ({ image, title, cursorMode = 'auto', width, height = '16rem' }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
+  const theme = useTheme()
   return (
-    <Box maxW="sm" borderRadius="8px" overflow="hidden" boxShadow="5px 5px #9290901c" m="3" bg="white">
+    <Box maxW="sm" overflow="hidden" boxShadow={`4px 6px 9px 5px ${theme?.myColors.shadow}`} m="3" bg="white">
       {!imageLoaded && <Skeleton width={width} height={height} />}
       <Image
         src={image}

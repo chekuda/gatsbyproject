@@ -4,7 +4,7 @@ import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { Flex, useBreakpointValue } from '@chakra-ui/react'
 import { SRLWrapper } from 'simple-react-lightbox'
 
-import { Card } from '../components/Card'
+import { Card } from '../atoms/Card'
 
 const Esculturas = ({ data }) => {
   const cardWidth = useBreakpointValue({ base: '14em', md: '12em', xl: '14em' })

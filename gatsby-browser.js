@@ -1,9 +1,9 @@
 import React from 'react'
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme, theme as basetheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import SimpleReactLightbox from 'simple-react-lightbox'
 
-import { HorizontalLayout } from './src/layout/HorizontalLayout'
+import { MainTemplate } from './src/templates/MainTemplate'
 import '@fontsource/roboto/400.css'
 
 const breakpoints = createBreakpoints({
@@ -19,10 +19,11 @@ const theme = extendTheme({
     body: 'Roboto',
     heading: 'Roboto',
   },
-  colors: {
-    dark: {
-      300: '#0f0f10',
-    },
+  myColors: {
+    dark: '#0f0f10',
+    shadow: '#9290901c',
+    lightGrey: '#e0e0e0',
+    brand: '#f7fafc',
   },
   breakpoints,
 })
@@ -38,5 +39,5 @@ export const wrapRootElement = ({ element }) => {
 export const wrapPageElement = ({ element, props }) => {
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it
-  return <HorizontalLayout {...props}>{element}</HorizontalLayout>
+  return <MainTemplate {...props}>{element}</MainTemplate>
 }
