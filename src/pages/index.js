@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Flex, Box, Image, Heading, Text, useBreakpointValue, useBreakpoint } from '@chakra-ui/react'
+import { Flex, Box, Image, Heading, Text, useBreakpointValue } from '@chakra-ui/react'
 
 const Section = ({ item, list }) => {
   const breakPoints = useBreakpointValue({

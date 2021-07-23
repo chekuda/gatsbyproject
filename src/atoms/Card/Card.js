@@ -6,7 +6,13 @@ export const Card = ({ image, title, cursorMode = 'auto', width, height = '16rem
   const [imageLoaded, setImageLoaded] = useState(false)
   const theme = useTheme()
   return (
-    <Box maxW="sm" overflow="hidden" boxShadow={`4px 6px 9px 5px ${theme?.myColors.shadow}`} m="3" bg="white">
+    <Box
+      maxW="sm"
+      overflow="hidden"
+      boxShadow={`4px 6px 9px 5px ${theme?.myColors?.shadow}`}
+      m="3"
+      bg="white"
+    >
       {!imageLoaded && <Skeleton width={width} height={height} />}
       <Image
         src={image}
