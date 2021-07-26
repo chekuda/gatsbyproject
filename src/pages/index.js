@@ -1,69 +1,13 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
+import { HelmetDatoCms } from 'gatsby-source-datocms'
 
 import { FadeInWhenVisible } from '../molecules/FadeInWhenVisible'
 import { Section } from '../atoms/Section'
+import { graphql } from 'gatsby'
 
-const dummyContent = [
-  {
-    heading: 'Jose Luis Checa',
-    content: (
-      <span>
-        Descubrir detalladamente, la muerte y sus formas.
-        <br />
-        Tocar las imágenes del genocidio consentido en África.
-        <br />
-        Contar las catástrofes y agonías, oír las manipulaciones,
-        <br />
-        las mentiras, en declaraciones, del político de turno.
-        <br />
-        Voy a desempolvar, atrapar el alma de Bukowski.
-        <br />
-        Ver si de una puta vez, con estas míseras miserias,
-        <br />
-        le doy forma a este poema.
-        <br />
-        Que tengo atragantado.
-        <br />
-      </span>
-    ),
-    image: {
-      src: '/images/daddy_no_bg.png',
-      alt: 'jose luis checa',
-      width: '300px',
-    },
-  },
-  {
-    heading: 'Ultimos Escritos',
-    content: (
-      <span>
-        Descubrir detalladamente, la muerte y sus formas.
-        <br />
-        Tocar las imágenes del genocidio consentido en África.
-        <br />
-        Contar las catástrofes y agonías, oír las manipulaciones,
-        <br />
-        las mentiras, en declaraciones, del político de turno.
-        <br />
-        Voy a desempolvar, atrapar el alma de Bukowski.
-        <br />
-        Ver si de una puta vez, con estas míseras miserias,
-        <br />
-        le doy forma a este poema.
-        <br />
-        Que tengo atragantado.
-        <br />
-      </span>
-    ),
-    image: {
-      src: '/images/daddy_no_bg.png',
-      alt: 'jose luis checa',
-      width: '300px',
-    },
-  },
-]
-
-const IndexPage = () => {
+const IndexPage = ({ data = {} }) => {
+  const { home, sections } = data
   const list = {
     visible: {
       opacity: 1,
@@ -79,11 +23,18 @@ const IndexPage = () => {
     visible: { opacity: 1, y: 0, duration: 0.3 },
     hidden: { opacity: 0, y: 20 },
   }
+
   return (
     <Box w="100%">
-      {dummyContent.map(ele => (
-        <FadeInWhenVisible key={ele.heading} list={list} ele={ele} threshold={0.2}>
-          <Section itemAnimation={item} heading={ele.heading} content={ele.content} image={ele.image} />
+      <HelmetDatoCms seo={home?.seoMetaTags} />
+      {[home].concat(sections?.nodes || []).map(node => (
+        <FadeInWhenVisible key={node.id} list={list} node={node} threshold={0.2}>
+          <Section
+            itemAnimation={item}
+            title={node.title}
+            content={node?.contentNode?.childMarkdownRemark}
+            image={node.image}
+          />
         </FadeInWhenVisible>
       ))}
     </Box>
@@ -91,3 +42,50 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+export const query = graphql`
+  query HomeQuery {
+    home: datoCmsHome {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
+      title
+      contentNode {
+        childMarkdownRemark {
+          html
+        }
+      }
+      image {
+        alt
+        isImage
+        title
+        url
+        sizes {
+          aspectRatio
+        }
+      }
+      introText
+    }
+    sections: allDatoCmsHomeSection {
+      nodes {
+        id
+        title
+        content
+        contentNode {
+          childMarkdownRemark {
+            html
+          }
+        }
+        image {
+          alt
+          isImage
+          title
+          url
+          sizes {
+            aspectRatio
+          }
+        }
+      }
+    }
+  }
+`
