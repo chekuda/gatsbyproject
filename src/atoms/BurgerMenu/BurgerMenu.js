@@ -1,25 +1,9 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
 
-import { motion, useCycle } from 'framer-motion'
+import { motion } from 'framer-motion'
 
-export const BurgerMenu = ({ onClick }) => {
-  const [animate, cycle] = useCycle(
-    {
-      main: { rotateZ: 0 },
-      firstLine: { y: 0 },
-      secondLine: { y: 0 },
-      thirdLine: { opacity: 1 },
-    },
-    {
-      main: {
-        rotateZ: '45deg',
-      },
-      firstLine: { y: 6 },
-      secondLine: { rotateZ: '90deg' },
-      thirdLine: { opacity: 0 },
-    },
-  )
+export const BurgerMenu = ({ onClick, animate, cycle }) => {
   return (
     <motion.div animate={animate.main} transition={{ duration: 0.3 }} onTap={() => cycle()}>
       <Box onClick={onClick}>

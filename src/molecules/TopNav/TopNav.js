@@ -1,10 +1,13 @@
 import React, { useState, Fragment, useCallback } from 'react'
-import { Flex, Box, Link, Image, useBreakpointValue, useTheme } from '@chakra-ui/react'
-import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Flex, Box, Image, useBreakpointValue, useTheme } from '@chakra-ui/react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { motion, AnimatePresence, useCycle } from 'framer-motion'
+
+import { useDisableScroll } from '../../lib/hooks/useDisableScroll'
 
 import { Nav } from '../../atoms/Nav'
 import { BurgerMenu } from '../../atoms/BurgerMenu'
+import { burgerAnimation } from './constants'
 
 export const TopNav = ({ uri }) => {
   const data = useStaticQuery(graphql`
@@ -21,26 +24,29 @@ export const TopNav = ({ uri }) => {
       }
     }
   `)
-  const { nodes } = data.allDatoCmsSocialProfile
+  // const { nodes } = data.allDatoCmsSocialProfile
   const breakPoint = useBreakpointValue({
     base: { burger: 'block', normal: 'none' },
     md: { burger: 'none', normal: 'block' },
   })
+  const theme = useTheme()
+  const [animate, cycle] = useCycle(...burgerAnimation)
   const [show, setShow] = useState(false)
   const handleShow = useCallback(() => setShow(!show), [show])
-
-  const theme = useTheme()
+  const onClikLink = useCallback(() => {
+    handleShow()
+    cycle()
+  }, [show])
+  useDisableScroll([show])
   return (
     <Fragment>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
         <Flex display="flex" justifyContent="center">
-          <Link to={'/'} href={'/'} as={GatsbyLink} _focus={{ outline: 'none' }}>
-            <Image width="150px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
-          </Link>
+          <Image width="150px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
         </Flex>
         <Box p="20px 0" as="nav" decoration="none">
           <Box display={breakPoint?.burger} onClick={handleShow}>
-            <BurgerMenu onClick={handleShow} />
+            <BurgerMenu onClick={handleShow} animate={animate} cycle={cycle} />
           </Box>
           <Box display={breakPoint?.normal}>
             <Nav uri={uri} />
@@ -62,7 +68,7 @@ export const TopNav = ({ uri }) => {
               right="0"
               width="100%"
               height="calc(100vh - 115px)"
-              borderRight="black"
+              boxShadow={`-7px 2px 9px 0px ${theme?.myColors?.darkShadow}`}
             >
               <Flex
                 flexDirection="column"
@@ -73,7 +79,7 @@ export const TopNav = ({ uri }) => {
                 w="100%"
                 bg={theme?.myColors.lightGrey}
               >
-                <Nav uri={uri} onClick={handleShow} />
+                <Nav uri={uri} onClick={onClikLink} />
               </Flex>
             </Box>
           </motion.div>

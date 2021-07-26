@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChakraProvider, extendTheme, theme as basetheme } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import SimpleReactLightbox from 'simple-react-lightbox'
 
@@ -22,6 +22,7 @@ const theme = extendTheme({
   myColors: {
     dark: '#0f0f10',
     shadow: '#9290901c',
+    darkShadow: '#b9b9b9',
     lightGrey: '#e0e0e0',
     brand: '#f7fafc',
   },
