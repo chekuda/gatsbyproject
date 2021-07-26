@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box } from '@chakra-ui/react'
 
-import { TopNav } from '../../molecules/TopNav'
+import { TopNav } from '../../organisms/TopNav'
 
 export const MainTemplate = ({ children, uri }) => {
   return (
@@ -11,7 +11,7 @@ export const MainTemplate = ({ children, uri }) => {
           <TopNav uri={uri} />
         </Box>
       </Box>
-      <Flex w="80%" maxW={1024} m="0 auto" p="20px 0" overflowY="auto">
+      <Flex w="80%" maxW={1024} m="0 auto" overflowY="auto">
         {children}
       </Flex>
     </Box>
