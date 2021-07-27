@@ -25,7 +25,7 @@ const IndexPage = ({ data = {} }) => {
   }
 
   return (
-    <Box w="100%">
+    <Box w="100%" className="indes-page-container">
       <HelmetDatoCms seo={home?.seoMetaTags} />
       {[home].concat(sections?.nodes || []).map(node => (
         <FadeInWhenVisible key={node.id} list={list} node={node} threshold={0.2}>

@@ -41,14 +41,14 @@ export const TopNav = ({ uri }) => {
   return (
     <Fragment>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
-        <Flex display="flex" justifyContent="center">
+        <Flex justifyContent="center">
           <Image width="150px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
         </Flex>
         <Box p="20px 0" as="nav" decoration="none">
-          <Box display={breakPoint?.burger} onClick={handleShow}>
+          <Box display={breakPoint?.burger} onClick={handleShow} className="nav-burger">
             <BurgerMenu onClick={handleShow} animate={animate} cycle={cycle} />
           </Box>
-          <Box display={breakPoint?.normal}>
+          <Box display={breakPoint?.normal} className="nav-main">
             <Nav uri={uri} />
           </Box>
         </Box>
@@ -63,6 +63,7 @@ export const TopNav = ({ uri }) => {
             transition={{ type: 'Inertia' }}
           >
             <Box
+              className="nav-banner"
               pos="absolute"
               top="0"
               right="0"

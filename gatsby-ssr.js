@@ -1,4 +1,4 @@
-// NOTE: EVERYTHING THAT CHANGE HERE MUST CHANGE IN gatsby-ssr.js
+// NOTE: EVERYTHING THAT CHANGE HERE MUST CHANGE IN gatsby-browser.js
 import React from 'react'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
