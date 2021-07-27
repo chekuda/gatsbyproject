@@ -32,6 +32,7 @@ export const TopNav = ({ uri }) => {
   const theme = useTheme()
   const [animate, cycle] = useCycle(...burgerAnimation)
   const [show, setShow] = useState(false)
+  const [logoLoaded, seLogoLoaded] = useState(false)
   const handleShow = useCallback(() => setShow(!show), [show])
   const onClikLink = useCallback(() => {
     handleShow()
@@ -39,19 +40,30 @@ export const TopNav = ({ uri }) => {
   }, [show])
   useDisableScroll([show])
   return (
-    <Fragment>
+    <Box pos="relative" zIndex={1}>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
         <Flex justifyContent="center">
-          <Image width="150px" objectFit="cover" src={'/images/alomejor.svg'} alt="Alomejor logo" />
+          <motion.div animate={{ y: 0 }} initial={{ y: 10 }} transition={{ type: 'Inertia' }}>
+            <Image
+              width="150px"
+              opacity={logoLoaded ? 1 : 0}
+              objectFit="cover"
+              src={'/images/alomejor.svg'}
+              alt="Alomejor logo"
+              onLoad={() => seLogoLoaded(true)}
+            />
+          </motion.div>
         </Flex>
-        <Box p="20px 0" as="nav" decoration="none">
-          <Box display={breakPoint?.burger} onClick={handleShow} className="nav-burger">
-            <BurgerMenu onClick={handleShow} animate={animate} cycle={cycle} />
+        {breakPoint && (
+          <Box p="20px 0" as="nav" decoration="none">
+            <Box display={breakPoint?.burger} onClick={handleShow} className="nav-burger">
+              <BurgerMenu onClick={handleShow} animate={animate} cycle={cycle} />
+            </Box>
+            <Box display={breakPoint?.normal} className="nav-main">
+              <Nav uri={uri} />
+            </Box>
           </Box>
-          <Box display={breakPoint?.normal} className="nav-main">
-            <Nav uri={uri} />
-          </Box>
-        </Box>
+        )}
       </Flex>
       <AnimatePresence>
         {show && (
@@ -86,6 +98,6 @@ export const TopNav = ({ uri }) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </Fragment>
+    </Box>
   )
 }

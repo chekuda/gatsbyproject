@@ -22,7 +22,7 @@ export const Section = ({
   content,
   image,
   height = 'calc(100vh - 115px)',
-  padding,
+  padding = '20px 0',
 }) => {
   const breakPoints = useBreakpointValue({
     base: {
@@ -38,7 +38,8 @@ export const Section = ({
   return (
     <Flex
       as="section"
-      p={padding || 0}
+      p={padding}
+      boxSizing="border-box"
       alignItems="center"
       h={breakPoints?.height}
       flexDirection={breakPoints?.direction}
@@ -54,12 +55,12 @@ export const Section = ({
         </motion.div>
         <motion.div variants={itemAnimation}>
           {typeof content === 'string' ? (
-            <Text as={'p'} p="20px 50px 0 0" lineHeight="2rem">
+            <Text as={'p'} p="20px 50px 20px 0" lineHeight="2rem">
               {content.html.replace(/\n/g, '<br />')}
             </Text>
           ) : (
             <Box
-              p="20px 50px 0 0"
+              p="20px 50px 20px 0"
               dangerouslySetInnerHTML={{ __html: content.html.replace(/\n/g, '<br />') }}
             />
           )}

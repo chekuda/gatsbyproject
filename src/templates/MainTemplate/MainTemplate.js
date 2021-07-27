@@ -9,9 +9,7 @@ export const MainTemplate = ({ children, uri }) => {
       <Box p="0 20px" m="0 auto" bg="black">
         <TopNav uri={uri} />
       </Box>
-      <Flex overflowY="auto" zIndex={1}>
-        {children}
-      </Flex>
+      <Flex overflowY="auto">{children}</Flex>
     </Fragment>
   )
 }
