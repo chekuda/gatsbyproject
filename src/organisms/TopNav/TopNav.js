@@ -3,7 +3,7 @@ import { Flex, Box, Image, useBreakpointValue, useTheme } from '@chakra-ui/react
 import { graphql, useStaticQuery } from 'gatsby'
 import { motion, AnimatePresence, useCycle } from 'framer-motion'
 
-import { useDisableScroll } from '../../lib/hooks/useDisableScroll'
+import { useDisableScroll } from '../../lib/hooks'
 
 import { Nav } from '../../atoms/Nav'
 import { BurgerMenu } from '../../atoms/BurgerMenu'

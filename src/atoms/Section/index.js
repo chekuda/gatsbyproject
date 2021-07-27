@@ -1,1 +1,1 @@
-export { Section } from './Section'
+export { Section, SectionInfoLayout } from './Section'

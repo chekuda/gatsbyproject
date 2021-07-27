@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { Flex, Box, Image, Heading, Text, useBreakpointValue } from '@chakra-ui/react'
 
 import { bottomPseudo, topPseudo } from './constans'
 
-const SectionImage = ({ image }) => {
+const SectionImage = ({ image, imageMaxW, imageMaxH }) => {
   return (
     <Image
-      maxW="300px"
-      maxH="400px"
+      maxW={imageMaxW}
+      maxH={imageMaxH}
       width={image.width}
       objectFit="cover"
       src={image.url}
@@ -18,16 +18,65 @@ const SectionImage = ({ image }) => {
   )
 }
 
-export const Section = ({
-  itemAnimation,
+export const SectionInfoLayout = ({
   title,
-  content,
+  titleSize,
+  titlePadding,
   image,
+  itemAnimation,
+  content,
+  contentSize,
+  imageMaxW,
+  imageMaxH,
+}) => {
+  return (
+    <Fragment>
+      <Box flex="1" justifyContent="center" overflow="hidden">
+        <motion.div variants={itemAnimation}>
+          <Heading as="h1" size={titleSize} p={titlePadding}>
+            {title}
+          </Heading>
+        </motion.div>
+        <motion.div variants={itemAnimation}>
+          {typeof content === 'string' ? (
+            <Text as={'p'} p="20px 20px 20px 0" lineHeight="2rem" fontSize={contentSize}>
+              {content?.html.replace(/\n/g, '<br />')}
+            </Text>
+          ) : (
+            <Box
+              p="20px 20px 20px 0"
+              fontSize={contentSize}
+              dangerouslySetInnerHTML={{ __html: content?.html.replace(/\n/g, '<br />') }}
+            />
+          )}
+        </motion.div>
+      </Box>
+      {image && (
+        <motion.div variants={itemAnimation}>
+          <Box justifyContent="center">
+            <SectionImage image={image} imageMaxW={imageMaxW} imageMaxH={imageMaxH} />
+          </Box>
+        </motion.div>
+      )}
+    </Fragment>
+  )
+}
+
+export const Section = ({
+  maxH,
   height = 'calc(100vh - 115px)',
+  width = '100%',
+  maxW,
   padding = '20px 0',
   withPseudo,
   isBeforePseudo,
   isAfterPseudo,
+  overflow = 'unset',
+  boxShadow,
+  rounded = 0,
+  mandatoryDirection,
+  alignItems = 'top',
+  children,
 }) => {
   const breakPoints = useBreakpointValue({
     base: {
@@ -45,41 +94,20 @@ export const Section = ({
       as="section"
       p={padding}
       boxSizing="border-box"
-      alignItems="center"
+      alignItems={alignItems}
       h={breakPoints?.height}
-      flexDirection={breakPoints?.direction}
-      w="80%"
-      maxW={1024}
+      flexDirection={mandatoryDirection || breakPoints?.direction}
+      w={width}
+      maxW={maxW}
       margin="0 auto"
       _before={{ ...(withPseudo && isBeforePseudo && { ...topPseudo }) }}
       _after={{ ...(withPseudo && isAfterPseudo && { ...bottomPseudo }) }}
+      overflow={overflow}
+      maxH={maxH}
+      rounded={rounded}
+      boxShadow={boxShadow}
     >
-      <Box flex="1" justifyContent="center">
-        <motion.div variants={itemAnimation}>
-          <Heading as="h1" size="4xl" paddingBottom="20px">
-            {title}
-          </Heading>
-        </motion.div>
-        <motion.div variants={itemAnimation}>
-          {typeof content === 'string' ? (
-            <Text as={'p'} p="20px 50px 20px 0" lineHeight="2rem">
-              {content?.html.replace(/\n/g, '<br />')}
-            </Text>
-          ) : (
-            <Box
-              p="20px 50px 20px 0"
-              dangerouslySetInnerHTML={{ __html: content?.html.replace(/\n/g, '<br />') }}
-            />
-          )}
-        </motion.div>
-      </Box>
-      {image && (
-        <motion.div variants={itemAnimation}>
-          <Box justifyContent="center">
-            <SectionImage image={image} />
-          </Box>
-        </motion.div>
-      )}
+      {children}
     </Flex>
   )
 }
