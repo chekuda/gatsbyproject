@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Flex, Box, Image, useBreakpointValue, useTheme } from '@chakra-ui/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { motion, AnimatePresence, useCycle } from 'framer-motion'
@@ -39,6 +39,7 @@ export const TopNav = ({ uri }) => {
     cycle()
   }, [show])
   useDisableScroll([show])
+
   return (
     <Box pos="relative" zIndex={1}>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">

@@ -2,6 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Flex, Box, Image, Heading, Text, useBreakpointValue } from '@chakra-ui/react'
 
+import { bottomPseudo, topPseudo } from './constans'
+
 const SectionImage = ({ image }) => {
   return (
     <Image
@@ -23,6 +25,9 @@ export const Section = ({
   image,
   height = 'calc(100vh - 115px)',
   padding = '20px 0',
+  withPseudo,
+  isBeforePseudo,
+  isAfterPseudo,
 }) => {
   const breakPoints = useBreakpointValue({
     base: {
@@ -46,6 +51,8 @@ export const Section = ({
       w="80%"
       maxW={1024}
       margin="0 auto"
+      _before={{ ...(withPseudo && isBeforePseudo && { ...topPseudo }) }}
+      _after={{ ...(withPseudo && isAfterPseudo && { ...bottomPseudo }) }}
     >
       <Box flex="1" justifyContent="center">
         <motion.div variants={itemAnimation}>
@@ -56,12 +63,12 @@ export const Section = ({
         <motion.div variants={itemAnimation}>
           {typeof content === 'string' ? (
             <Text as={'p'} p="20px 50px 20px 0" lineHeight="2rem">
-              {content.html.replace(/\n/g, '<br />')}
+              {content?.html.replace(/\n/g, '<br />')}
             </Text>
           ) : (
             <Box
               p="20px 50px 20px 0"
-              dangerouslySetInnerHTML={{ __html: content.html.replace(/\n/g, '<br />') }}
+              dangerouslySetInnerHTML={{ __html: content?.html.replace(/\n/g, '<br />') }}
             />
           )}
         </motion.div>
