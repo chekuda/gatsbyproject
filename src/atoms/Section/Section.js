@@ -40,9 +40,11 @@ export const Section = ({
       as="section"
       p={padding || 0}
       alignItems="center"
-      w="100%"
       h={breakPoints?.height}
       flexDirection={breakPoints?.direction}
+      w="80%"
+      maxW={1024}
+      margin="0 auto"
     >
       <Box flex="1" justifyContent="center">
         <motion.div variants={itemAnimation}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
-import { Flex, useBreakpointValue } from '@chakra-ui/react'
+import { Flex, useBreakpointValue, Box } from '@chakra-ui/react'
 import { SRLWrapper } from 'simple-react-lightbox'
 
 import { Card } from '../atoms/Card'
@@ -10,7 +10,7 @@ const Esculturas = ({ data }) => {
   const cardWidth = useBreakpointValue({ base: '14em', md: '12em', xl: '14em' })
   const { esculturas, pageInfo } = data || {}
   return (
-    <>
+    <Box margin="0 auto">
       <HelmetDatoCms seo={pageInfo.seoMetaTags} />
       <SRLWrapper>
         <Flex flexWrap="wrap" justifyContent="center">
@@ -27,7 +27,7 @@ const Esculturas = ({ data }) => {
           ))}
         </Flex>
       </SRLWrapper>
-    </>
+    </Box>
   )
 }
 

@@ -7,11 +7,11 @@ export const MainTemplate = ({ children, uri }) => {
   return (
     <Box>
       <Box bg="black">
-        <Box w="80%" maxW={1024} m="0 auto">
+        <Box margin="0 auto" p="0 20px" m="0 auto">
           <TopNav uri={uri} />
         </Box>
       </Box>
-      <Flex w="80%" maxW={1024} m="0 auto" overflowY="auto">
+      <Flex overflowY="auto" zIndex={1}>
         {children}
       </Flex>
     </Box>
