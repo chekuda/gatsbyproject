@@ -28,10 +28,11 @@ export const SectionInfoLayout = ({
   contentSize,
   imageMaxW,
   imageMaxH,
+  textAlign = 'auto',
 }) => {
   return (
     <Fragment>
-      <Box flex="1" justifyContent="center" overflow="hidden">
+      <Box flex="1" justifyContent="center" overflow="hidden" textAlign={textAlign}>
         <motion.div variants={itemAnimation}>
           <Heading as="h1" size={titleSize} p={titlePadding}>
             {title}

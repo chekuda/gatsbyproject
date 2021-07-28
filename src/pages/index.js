@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Box, useBreakpointValue } from '@chakra-ui/react'
+import { Box, useBreakpointValue, Divider } from '@chakra-ui/react'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { graphql } from 'gatsby'
 
@@ -8,7 +8,20 @@ import { Section, SectionInfoLayout } from '../atoms/Section'
 import { SectionCarousel } from '../organisms/SectionCarousel'
 
 const IndexPage = ({ data = {}, withPseudo = true }) => {
-  const showPseudoByDevice = useBreakpointValue({ md: true })
+  const { showPseudoByDevice, titleSize, displayDivider, textSectionAlign } =
+    useBreakpointValue({
+      base: {
+        howPseudoByDevice: false,
+        titleSize: '3xl',
+        displayDivider: true,
+        textSectionAlign: 'center',
+      },
+      md: {
+        showPseudoByDevice: true,
+        titleSize: '4xl',
+        textSectionAlign: 'left',
+      },
+    }) || {}
   const { home, sections } = data
   const list = {
     visible: {
@@ -39,22 +52,25 @@ const IndexPage = ({ data = {}, withPseudo = true }) => {
             width="80%"
             maxW={1024}
             alignItems="center"
+            padding="40px 0"
           >
             <SectionInfoLayout
               itemAnimation={item}
               title={node.title}
+              textAlign={textSectionAlign}
               titlePadding="0 0 30px 0"
-              titleSize="4xl"
+              titleSize={titleSize}
               content={node?.contentNode?.childMarkdownRemark}
               image={node.image}
               imageMaxH="400px"
               imageMaxW="300px"
             />
           </Section>
+          {displayDivider && <Divider w="80%" margin="0 auto" />}
         </FadeInWhenVisible>
       ))}
       <Box maxW="80%" m="0 auto" pos="relative">
-        <SectionCarousel gap={20} nodesToRender={nodesToRender} title="Events" />
+        <SectionCarousel gap={20} nodesToRender={nodesToRender} title="Eventos" />
       </Box>
     </Box>
   )

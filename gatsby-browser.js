@@ -22,7 +22,7 @@ export const theme = extendTheme({
   },
   myColors: {
     dark: '#0f0f10',
-    shadow: '#9290901c',
+    shadow: '#92909052',
     darkShadow: '#b9b9b9',
     lightGrey: '#e0e0e0',
     brand: '#f7fafc',

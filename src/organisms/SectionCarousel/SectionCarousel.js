@@ -16,6 +16,7 @@ export const SectionCarousel = ({
   isBeforePseudo,
   maxH = 200,
   height = 'auto',
+  titlePadding = 0,
 }) => {
   return (
     <Section
@@ -27,7 +28,7 @@ export const SectionCarousel = ({
       height={height}
     >
       {title && (
-        <Heading as="h1" size="xl" p="40px" textAlign="center">
+        <Heading as="h1" size="xl" pb="40px" textAlign="center">
           {title}
         </Heading>
       )}
@@ -45,7 +46,7 @@ export const SectionCarousel = ({
               <SectionInfoLayout
                 itemAnimation={item}
                 title={node.title}
-                titlePadding={0}
+                titlePadding={titlePadding}
                 titleSize="md"
                 contentSize="0.7rem"
                 content={node?.contentNode?.childMarkdownRemark}
