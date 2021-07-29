@@ -44,16 +44,18 @@ export const TopNav = ({ uri }) => {
     <Box pos="relative" zIndex={1}>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
         <Flex justifyContent="center">
-          <motion.div animate={{ y: 0 }} initial={{ y: 10 }} transition={{ type: 'Inertia' }}>
-            <Image
-              width="150px"
-              opacity={logoLoaded ? 1 : 0}
-              objectFit="cover"
-              src={'/images/alomejor.svg'}
-              alt="Alomejor logo"
-              onLoad={() => seLogoLoaded(true)}
-            />
-          </motion.div>
+          {uri !== '/' && (
+            <motion.div animate={{ y: 0 }} initial={{ y: 10 }} transition={{ type: 'Inertia' }}>
+              <Image
+                width="150px"
+                opacity={logoLoaded ? 1 : 0}
+                objectFit="cover"
+                src={'/images/alomejorWhite.svg'}
+                alt="Alomejor logo"
+                onLoad={() => seLogoLoaded(true)}
+              />
+            </motion.div>
+          )}
         </Flex>
         {breakPoint && (
           <Box p="20px 0" as="nav" decoration="none">

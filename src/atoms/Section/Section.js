@@ -78,10 +78,13 @@ export const Section = ({
   mandatoryDirection,
   alignItems = 'top',
   children,
+  bgColor = 'white',
+  justifyContent = 'unset',
+  heightBase = 'unset',
 }) => {
   const breakPoints = useBreakpointValue({
     base: {
-      height: 'auto',
+      height: heightBase,
       direction: 'column',
     },
     md: {
@@ -92,6 +95,7 @@ export const Section = ({
 
   return (
     <Flex
+      bgColor={bgColor}
       as="section"
       p={padding}
       boxSizing="border-box"
@@ -107,6 +111,7 @@ export const Section = ({
       maxH={maxH}
       rounded={rounded}
       boxShadow={boxShadow}
+      justifyContent={justifyContent}
     >
       {children}
     </Flex>
