@@ -1,48 +1,124 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { Box, useBreakpointValue, Divider } from '@chakra-ui/react'
+import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { graphql } from 'gatsby'
-// import { HelmetDatoCms } from 'gatsby-source-datocms'
-// import Img from 'gatsby-image'
-// import Layout from "../components/layout"
 
-const About = () => (
-  // <Layout>
-  <article className="sheet">
-    {/* <HelmetDatoCms seo={about.seoMetaTags} /> */}
-    {/* <div className="sheet__inner">
-        <h1 className="sheet__title">{about.title}</h1>
-        <p className="sheet__lead">{about.subtitle}</p>
-        <div className="sheet__gallery">
-          <Img fluid={about.photo.fluid} />
-        </div>
-        <div
-          className="sheet__body"
-          dangerouslySetInnerHTML={{
-            __html: about.bioNode.childMarkdownRemark.html,
-          }}
-        />
-      </div> */}
-  </article>
-  // </Layout>
-)
+import { FadeInWhenVisible } from '../molecules/FadeInWhenVisible'
+import { Section, SectionInfoLayout } from '../atoms/Section'
+import { SectionCarousel } from '../organisms/SectionCarousel'
 
-export default About
+const AboutPage = ({ data = {}, withPseudo = true }) => {
+  const { showPseudoByDevice, titleSize, displayDivider, textSectionAlign } =
+    useBreakpointValue({
+      base: {
+        howPseudoByDevice: false,
+        titleSize: '3xl',
+        displayDivider: true,
+        textSectionAlign: 'center',
+      },
+      md: {
+        showPseudoByDevice: true,
+        titleSize: '4xl',
+        textSectionAlign: 'left',
+      },
+    }) || {}
+  const { home, sections } = data
+  const list = {
+    visible: {
+      opacity: 1,
+      transition: {
+        when: 'beforeChildren',
+        staggerChildren: 0.3,
+      },
+    },
+    hidden: { opacity: 0 },
+  }
+
+  const item = {
+    visible: { opacity: 1, y: 0, duration: 0.3 },
+    hidden: { opacity: 0, y: 20 },
+  }
+  const nodesToRender = useMemo(() => [home].concat(sections?.nodes || []), [home, sections])
+
+  return (
+    <Box w="100%" className="indes-page-container">
+      <HelmetDatoCms seo={home?.seoMetaTags} />
+      {nodesToRender.map((node, id) => (
+        <FadeInWhenVisible key={node.id || node.title} list={list} node={node} threshold={0.2}>
+          <Section
+            withPseudo={showPseudoByDevice && withPseudo}
+            isBeforePseudo={id !== 0}
+            isAfterPseudo={true}
+            width="80%"
+            maxW={1024}
+            alignItems="center"
+            padding="40px 0"
+          >
+            <SectionInfoLayout
+              itemAnimation={item}
+              title={node.title}
+              textAlign={textSectionAlign}
+              titlePadding="0 0 30px 0"
+              titleSize={titleSize}
+              content={node?.contentNode?.childMarkdownRemark}
+              image={node.image}
+              imageMaxH="400px"
+              imageMaxW="300px"
+            />
+          </Section>
+          {displayDivider && <Divider w="80%" margin="0 auto" />}
+        </FadeInWhenVisible>
+      ))}
+      <Box maxW="80%" m="0 auto" pos="relative">
+        <SectionCarousel gap={20} nodesToRender={nodesToRender} title="Eventos" />
+      </Box>
+    </Box>
+  )
+}
+
+export default AboutPage
 
 export const query = graphql`
   query AboutQuery {
-    about: datoCmsAboutPage {
+    home: datoCmsHome {
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
       title
-      subtitle
-      photo {
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
-          ...GatsbyDatoCmsSizes
-        }
-      }
-      bioNode {
+      contentNode {
         childMarkdownRemark {
           html
+        }
+      }
+      image {
+        alt
+        isImage
+        title
+        url
+        sizes {
+          aspectRatio
+        }
+      }
+      introText
+    }
+    sections: allDatoCmsHomeSection {
+      nodes {
+        id
+        title
+        content
+        contentNode {
+          childMarkdownRemark {
+            html
+          }
+        }
+        image {
+          alt
+          isImage
+          title
+          url
+          sizes {
+            aspectRatio
+          }
         }
       }
     }

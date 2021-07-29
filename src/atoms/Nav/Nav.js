@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Box, Link } from '@chakra-ui/react'
+import { Box, Link, useTheme } from '@chakra-ui/react'
 import { Link as GatsbyLink } from 'gatsby'
 
 const links = [
@@ -30,11 +30,12 @@ const links = [
 ]
 
 export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {} }) => {
+  const theme = useTheme()
   return (
     <Fragment>
       {links.map(({ name, url }) => (
         <Link
-          _hover={{ textDecoration: 'none', color: 'blue.400' }}
+          _hover={{ textDecoration: 'none', color: theme?.myColors?.tomato }}
           _focus={{ outline: 'none' }}
           m="0 5px"
           to={url}

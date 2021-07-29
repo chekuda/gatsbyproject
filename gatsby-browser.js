@@ -26,6 +26,7 @@ export const theme = extendTheme({
     darkShadow: '#b9b9b9',
     lightGrey: '#e0e0e0',
     brand: '#f7fafc',
+    tomato: '#dc2d2a',
   },
   breakpoints,
 })
