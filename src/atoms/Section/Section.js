@@ -78,7 +78,7 @@ export const Section = ({
   mandatoryDirection,
   alignItems = 'top',
   children,
-  bgColor = 'white',
+  bgColor = 'unset',
   justifyContent = 'unset',
   heightBase = 'unset',
 }) => {

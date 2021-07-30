@@ -42,6 +42,7 @@ export const SectionCarousel = ({
               maxH={maxH}
               padding={5}
               rounded={5}
+              bgColor="white"
             >
               <SectionInfoLayout
                 itemAnimation={item}

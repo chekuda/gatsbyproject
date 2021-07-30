@@ -9,7 +9,7 @@ import { Nav } from '../../atoms/Nav'
 import { BurgerMenu } from '../../atoms/BurgerMenu'
 import { burgerAnimation } from './constants'
 
-export const TopNav = ({ uri }) => {
+export const TopNav = ({ uri, isHome }) => {
   const data = useStaticQuery(graphql`
     query SocialQuery {
       allDatoCmsSocialProfile {
@@ -44,7 +44,7 @@ export const TopNav = ({ uri }) => {
     <Box pos="relative" zIndex={1}>
       <Flex color="white" justifyContent="space-between" alignItems="center" h="115px">
         <Flex justifyContent="center">
-          {uri !== '/' && (
+          {!isHome && (
             <motion.div animate={{ y: 0 }} initial={{ y: 10 }} transition={{ type: 'Inertia' }}>
               <Image
                 width="150px"
