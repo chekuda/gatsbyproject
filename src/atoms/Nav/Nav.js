@@ -15,18 +15,18 @@ const links = [
     name: 'Esculturas',
     url: '/esculturas',
   },
-  {
-    name: 'Pinturas',
-    url: '#',
-  },
-  {
-    name: 'Libros',
-    url: '#',
-  },
-  {
-    name: 'Exposiciones',
-    url: '#',
-  },
+  // {
+  //   name: 'Pinturas',
+  //   url: '#',
+  // },
+  // {
+  //   name: 'Libros',
+  //   url: '#',
+  // },
+  // {
+  //   name: 'Exposiciones',
+  //   url: '#',
+  // },
 ]
 
 export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {} }) => {
