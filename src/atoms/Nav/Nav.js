@@ -40,6 +40,7 @@ export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {} }) => {
           m="0 5px"
           to={url}
           fontSize="1rem"
+          fontWeight="bold"
           as={GatsbyLink}
           key={name}
           href={url}

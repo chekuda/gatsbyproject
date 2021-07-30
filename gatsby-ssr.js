@@ -22,11 +22,16 @@ export const theme = extendTheme({
   },
   myColors: {
     dark: '#0f0f10',
+    bgGray: '#202020',
     shadow: '#9290901c',
-    darkShadow: '#b9b9b9',
+    darkGray: '#323232',
     lightGrey: '#e0e0e0',
     brand: '#f7fafc',
     tomato: '#dc2d2a',
+    bgDark: '#2F4858',
+    blueDark: '##374E77',
+    violete: '#634B8A',
+    pinkDark: '#9B3B84',
   },
   breakpoints,
 })

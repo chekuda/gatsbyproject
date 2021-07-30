@@ -84,7 +84,7 @@ export const TopNav = ({ uri }) => {
               right="0"
               width="100%"
               height="calc(100vh - 115px)"
-              boxShadow={`-7px 2px 9px 0px ${theme?.myColors?.darkShadow}`}
+              boxShadow={`-3px 5px 9px 0px ${theme?.myColors?.darkShadow}`}
             >
               <Flex
                 flexDirection="column"
@@ -93,7 +93,8 @@ export const TopNav = ({ uri }) => {
                 lineHeight="2em"
                 height="100%"
                 w="100%"
-                bg={theme?.myColors.lightGrey}
+                bg={theme?.myColors.bgGray}
+                color="white"
               >
                 <Nav uri={uri} onClick={onClikLink} />
               </Flex>
