@@ -21,37 +21,39 @@ const IndexPage = ({ data = {} }) => {
   const [logoLoaded, seLogoLoaded] = useState(false)
 
   return (
-    <Flex w="100%" className="indes-page-container" h="calc(100vh - 115px)">
-      <HelmetDatoCms seo={home?.seoMetaTags} />
-      <FadeInWhenVisible list={list} threshold={0.2}>
-        <Section
-          alignItems="center"
-          padding="40px 0"
-          mandatoryDirection="column"
-          maxW="90em"
-          justifyContent="center"
-          heightBase="100%"
-          bgColor="unset"
-        >
-          <Image
-            width="80%"
-            visibility={logoLoaded ? 'visible' : 'hidden'}
-            objectFit="cover"
-            src={'/images/alomejor.svg'}
-            alt="Alomejor logo"
-            onLoad={() => seLogoLoaded(true)}
-            margin="0 auto"
-          />
-          {logoLoaded && (
-            <Box color="white" fontSize="xl" width="80%" p="0 20px">
-              <Box as="p" textAlign="right">
-                Jose Luis Checa Alamillos
+    <Box className="container-black" w="100%">
+      <Flex w="100%" className="indes-page-container" h="calc(100vh - 115px)">
+        <HelmetDatoCms seo={home?.seoMetaTags} />
+        <FadeInWhenVisible list={list} threshold={0.2}>
+          <Section
+            alignItems="center"
+            padding="40px 0"
+            mandatoryDirection="column"
+            maxW="90em"
+            justifyContent="center"
+            heightBase="100%"
+            bgColor="unset"
+          >
+            <Image
+              width="80%"
+              visibility={logoLoaded ? 'visible' : 'hidden'}
+              objectFit="cover"
+              src={'/images/alomejor.svg'}
+              alt="Alomejor logo"
+              onLoad={() => seLogoLoaded(true)}
+              margin="0 auto"
+            />
+            {logoLoaded && (
+              <Box color="white" fontSize="xl" width="80%" p="0 20px">
+                <Box as="p" textAlign="right">
+                  Jose Luis Checa Alamillos
+                </Box>
               </Box>
-            </Box>
-          )}
-        </Section>
-      </FadeInWhenVisible>
-    </Flex>
+            )}
+          </Section>
+        </FadeInWhenVisible>
+      </Flex>
+    </Box>
   )
 }
 
@@ -59,7 +61,7 @@ export default IndexPage
 
 export const query = graphql`
   query HomeQuery {
-    home: datoCmsHome {
+    home: datoCmsIndexPage {
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }

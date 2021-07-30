@@ -96,7 +96,7 @@ export const TopNav = ({ uri, isHome }) => {
                 bg={theme?.myColors.bgGray}
                 color="white"
               >
-                <Nav uri={uri} onClick={onClikLink} />
+                <Nav uri={uri} onClick={onClikLink} fontSize="1.5rem"/>
               </Flex>
             </Box>
           </motion.div>

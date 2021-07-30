@@ -22,7 +22,7 @@ const AboutPage = ({ data = {}, withPseudo = true }) => {
         textSectionAlign: 'left',
       },
     }) || {}
-  const { home, sections } = data
+  const { about, sections } = data
   const list = {
     visible: {
       opacity: 1,
@@ -38,11 +38,11 @@ const AboutPage = ({ data = {}, withPseudo = true }) => {
     visible: { opacity: 1, y: 0, duration: 0.3 },
     hidden: { opacity: 0, y: 20 },
   }
-  const nodesToRender = useMemo(() => [home].concat(sections?.nodes || []), [home, sections])
+  const nodesToRender = useMemo(() => [about].concat(sections?.nodes || []), [about, sections])
 
   return (
-    <Box w="100%" className="indes-page-container">
-      <HelmetDatoCms seo={home?.seoMetaTags} />
+    <Box w="100%" className="indes-page-container container-white">
+      <HelmetDatoCms seo={about?.seoMetaTags} />
       {nodesToRender.map((node, id) => (
         <FadeInWhenVisible key={node.id || node.title} list={list} node={node} threshold={0.2}>
           <Section
@@ -80,7 +80,7 @@ export default AboutPage
 
 export const query = graphql`
   query AboutQuery {
-    home: datoCmsHome {
+    about: datoCmsHome {
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }

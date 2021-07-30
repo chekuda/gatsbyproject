@@ -12,7 +12,7 @@ export const MainTemplate = ({ children, uri }) => {
       <Box p="0 20px" m="0 auto" bg="black">
         <TopNav uri={uri} isHome={isHome} />
       </Box>
-      <Flex className={isHome ? 'container-black' : 'container-white'} overflowY="auto">
+      <Flex overflowY="auto">
         {children}
       </Flex>
     </Fragment>

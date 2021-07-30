@@ -10,7 +10,7 @@ const Esculturas = ({ data }) => {
   const cardWidth = useBreakpointValue({ base: '14em', md: '12em', xl: '14em' })
   const { esculturas, pageInfo } = data || {}
   return (
-    <Box margin="0 auto" p="20px 0">
+    <Box margin="0 auto" p="20px 0" className="container-white">
       <HelmetDatoCms seo={pageInfo.seoMetaTags} />
       <SRLWrapper>
         <Flex flexWrap="wrap" justifyContent="center">

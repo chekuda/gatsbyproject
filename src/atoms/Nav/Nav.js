@@ -29,7 +29,7 @@ const links = [
   // },
 ]
 
-export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {} }) => {
+export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {}, fontSize = '1rem' }) => {
   const theme = useTheme()
   return (
     <Fragment>
@@ -39,7 +39,7 @@ export const Nav = ({ uri, lineHeight = 'inherit', onClick = () => {} }) => {
           _focus={{ outline: 'none' }}
           m="0 5px"
           to={url}
-          fontSize="1rem"
+          fontSize={fontSize}
           fontWeight="bold"
           as={GatsbyLink}
           key={name}
