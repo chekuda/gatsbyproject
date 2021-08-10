@@ -29,23 +29,39 @@ export const SectionInfoLayout = ({
   imageMaxW,
   imageMaxH,
   textAlign = 'auto',
+  subtitle,
+  subtitleSize,
+  subtitlePadding,
+  contentPadding = '20px 20px 20px 0',
 }) => {
   return (
     <Fragment>
       <Box flex="1" justifyContent="center" overflow="hidden" textAlign={textAlign}>
-        <motion.div variants={itemAnimation}>
-          <Heading as="h1" size={titleSize} p={titlePadding}>
-            {title}
-          </Heading>
-        </motion.div>
+        {title && (
+          <motion.div variants={itemAnimation}>
+            <Heading as="h1" size={titleSize} p={titlePadding}>
+              {title}
+            </Heading>
+          </motion.div>
+        )}
+        {subtitle && (
+          <motion.div variants={itemAnimation}>
+            <Heading
+              as="h4"
+              size={subtitleSize}
+              p={subtitlePadding}
+              dangerouslySetInnerHTML={{ __html: subtitle.replace(/\n/g, '<br />') }}
+            />
+          </motion.div>
+        )}
         <motion.div variants={itemAnimation}>
           {typeof content === 'string' ? (
-            <Text as={'p'} p="20px 20px 20px 0" lineHeight="2rem" fontSize={contentSize}>
+            <Text as={'p'} p={contentPadding} lineHeight="2rem" fontSize={contentSize}>
               {content?.html.replace(/\n/g, '<br />')}
             </Text>
           ) : (
             <Box
-              p="20px 20px 20px 0"
+              p={contentPadding}
               fontSize={contentSize}
               dangerouslySetInnerHTML={{ __html: content?.html.replace(/\n/g, '<br />') }}
             />

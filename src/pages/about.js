@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Box, useBreakpointValue, Divider } from '@chakra-ui/react'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { graphql } from 'gatsby'
@@ -8,17 +8,20 @@ import { Section, SectionInfoLayout } from '../atoms/Section'
 import { SectionCarousel } from '../organisms/SectionCarousel'
 
 const AboutPage = ({ data = {}, withPseudo = true }) => {
-  const { showPseudoByDevice, titleSize, displayDivider, textSectionAlign } =
+  const { showPseudoByDevice, titleSize, displayDivider, textSectionAlign, subtitleSize, contentPadding } =
     useBreakpointValue({
       base: {
         howPseudoByDevice: false,
         titleSize: '3xl',
+        subtitleSize: 'sm',
         displayDivider: true,
         textSectionAlign: 'center',
+        contentPadding: '20px 0',
       },
       md: {
         showPseudoByDevice: true,
         titleSize: '4xl',
+        subtitleSize: 'md',
         textSectionAlign: 'left',
       },
     }) || {}
@@ -38,39 +41,37 @@ const AboutPage = ({ data = {}, withPseudo = true }) => {
     visible: { opacity: 1, y: 0, duration: 0.3 },
     hidden: { opacity: 0, y: 20 },
   }
-  const nodesToRender = useMemo(() => [about].concat(sections?.nodes || []), [about, sections])
-
   return (
     <Box w="100%" className="indes-page-container container-white">
       <HelmetDatoCms seo={about?.seoMetaTags} />
-      {nodesToRender.map((node, id) => (
-        <FadeInWhenVisible key={node.id || node.title} list={list} node={node} threshold={0.2}>
-          <Section
-            withPseudo={showPseudoByDevice && withPseudo}
-            isBeforePseudo={id !== 0}
-            isAfterPseudo={true}
-            width="80%"
-            maxW={1024}
-            alignItems="center"
-            padding="40px 0"
-          >
-            <SectionInfoLayout
-              itemAnimation={item}
-              title={node.title}
-              textAlign={textSectionAlign}
-              titlePadding="0 0 30px 0"
-              titleSize={titleSize}
-              content={node?.contentNode?.childMarkdownRemark}
-              image={node.image}
-              imageMaxH="400px"
-              imageMaxW="300px"
-            />
-          </Section>
-          {displayDivider && <Divider w="80%" margin="0 auto" />}
-        </FadeInWhenVisible>
-      ))}
+      <FadeInWhenVisible key={about.id || about.title} list={list} node={about} threshold={0.2}>
+        <Section
+          withPseudo={showPseudoByDevice && withPseudo}
+          isAfterPseudo={true}
+          width="80%"
+          maxW={1024}
+          alignItems="center"
+          padding="40px 0"
+        >
+          <SectionInfoLayout
+            itemAnimation={item}
+            title={about.title}
+            textAlign={textSectionAlign}
+            titlePadding="0 0 20px 0"
+            titleSize={titleSize}
+            subtitle={about?.subtitle}
+            subtitleSize={subtitleSize}
+            content={about?.contentNode?.childMarkdownRemark}
+            image={about.image}
+            imageMaxH="400px"
+            imageMaxW="300px"
+            contentPadding={contentPadding}
+          />
+        </Section>
+        {displayDivider && <Divider w="80%" margin="0 auto" />}
+      </FadeInWhenVisible>
       <Box maxW="80%" m="0 auto" pos="relative">
-        <SectionCarousel gap={20} nodesToRender={nodesToRender} title="Eventos" />
+        <SectionCarousel gap={20} nodesToRender={sections?.nodes} title="Eventos" />
       </Box>
     </Box>
   )
@@ -84,7 +85,9 @@ export const query = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      id
       title
+      subtitle
       contentNode {
         childMarkdownRemark {
           html
